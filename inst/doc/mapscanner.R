@@ -8,15 +8,6 @@ red <- 2
 vwidth <- 992 / red
 vheight <- 744 / red
 
-## ----install, eval = FALSE----------------------------------------------------
-#  remotes::install_github ("ropensci/mapscanner")
-#  remotes::install_git("https://git.sr.ht/~mpadge/mapscanner")
-#  remotes::install_bitbucket("mpadge/mapscanner")
-#  remotes::install_gitlab("mpadge/mapscanner")
-
-## ----load---------------------------------------------------------------------
-library (mapscanner)
-
 ## ----generate-fakey, eval = FALSE---------------------------------------------
 #  ms_generate_map ("chennai india", mapname = "chennai")
 
@@ -53,74 +44,87 @@ f <- file.path (tempdir (), "omama-polygons.png")
 chk <- file.copy (op, f)
 knitr::include_graphics (f)
 
-## ----rectify, message = FALSE-------------------------------------------------
-f_orig <- system.file ("extdata", "omaha.png", package = "mapscanner")
-f_mod <- system.file ("extdata", "omaha-polygons.png", package = "mapscanner")
-xy <- ms_rectify_map (f_orig, f_mod, nitems = 2)
-xy
+## ----rectify, message = FALSE, eval = FALSE-----------------------------------
+#  f_orig <- system.file ("extdata", "omaha.png", package = "mapscanner")
+#  f_mod <- system.file ("extdata", "omaha-polygons.png", package = "mapscanner")
+#  xy <- ms_rectify_map (f_orig, f_mod, nitems = 2)
+#  xy
 
-## ----mapshot-hulls, eval = TRUE, echo = FALSE---------------------------------
-xy$id <- seq (nrow (xy))
-if (!file.exists ("mapshot-polys.png"))
-{
-    x <- mapview::mapview (xy)
-    mapview::mapshot (x, file = "mapshot-hulls.png",
-                      remove_controls = c ("layersControl", "zoomControl"),
-                      vwidth = vwidth, vheight = vheight)
-}
+## ----rectify-output, echo = FALSE---------------------------------------------
+m <- c (
+"Simple feature collection with 2 features and 0 fields",
+"Geometry type: POLYGON",
+"Dimension:     XY",
+"Bounding box:  xmin: -96.11801 ymin: 41.26638 xmax: -96.02722 ymax: 41.30108",
+"Geodetic CRS:  WGS 84",
+"                        geometry",
+"1 POLYGON ((-96.10692 41.2684...",
+"2 POLYGON ((-96.0276 41.2964,...")
+m <- paste0 (m, collapse = "\n")
+message (m)
+
+## ----mapshot-hulls, eval = FALSE, echo = FALSE--------------------------------
+#  xy$id <- seq (nrow (xy))
+#  if (!file.exists ("mapshot-polys.png"))
+#  {
+#      x <- mapview::mapview (xy)
+#      mapview::mapshot (x, file = "mapshot-hulls.png",
+#                        remove_controls = c ("layersControl", "zoomControl"),
+#                        vwidth = vwidth, vheight = vheight)
+#  }
 
 ## ----mapview-fakey, eval = FALSE----------------------------------------------
 #  xy$id <- seq (nrow (xy))
 #  mapview::mapview (xy)
 
 ## ----mapshot-hulls-png, echo = FALSE, out.width = "75%"-----------------------
-knitr::include_graphics ("mapshot-hulls.png")
+knitr::include_graphics ("./mapshot-hulls.png")
 #plot (xy)
 
-## ----type-polys---------------------------------------------------------------
-f_orig <- system.file ("extdata", "omaha.png", package = "mapscanner")
-f_mod <- system.file ("extdata", "omaha-polygons.png", package = "mapscanner")
-xy <- ms_rectify_map (f_orig, f_mod, type = "polygons", quiet = TRUE)
+## ----type-polys, eval = FALSE-------------------------------------------------
+#  f_orig <- system.file ("extdata", "omaha.png", package = "mapscanner")
+#  f_mod <- system.file ("extdata", "omaha-polygons.png", package = "mapscanner")
+#  xy <- ms_rectify_map (f_orig, f_mod, type = "polygons", quiet = TRUE)
 
-## ----mapview-polys, eval = TRUE, echo = FALSE---------------------------------
-xy$id <- seq (nrow (xy))
-if (!file.exists ("mapshot-polys.png"))
-{
-    x <- mapview::mapview (xy)
-    mapview::mapshot (x, file = "mapshot-polys.png",
-                      remove_controls = c ("layersControl", "zoomControl"),
-                      vwidth = vwidth, vheight = vheight)
-}
+## ----mapview-polys, eval = FALSE, echo = FALSE--------------------------------
+#  xy$id <- seq (nrow (xy))
+#  if (!file.exists ("mapshot-polys.png"))
+#  {
+#      x <- mapview::mapview (xy)
+#      mapview::mapshot (x, file = "mapshot-polys.png",
+#                        remove_controls = c ("layersControl", "zoomControl"),
+#                        vwidth = vwidth, vheight = vheight)
+#  }
 
 ## ----mapview-polys-fakey, eval = FALSE----------------------------------------
 #  xy$id <- seq (nrow (xy))
 #  mapview::mapview (xy)
 
 ## ----mapshot-polys-png, echo = FALSE, out.width = "75%"-----------------------
-knitr::include_graphics ("mapshot-polys.png")
+knitr::include_graphics ("./mapshot-polys.png")
 #plot (xy)
 
-## ----type-points--------------------------------------------------------------
-f_orig <- system.file ("extdata", "omaha.png", package = "mapscanner")
-f_mod <- system.file ("extdata", "omaha-polygons.png", package = "mapscanner")
-xy <- ms_rectify_map (f_orig, f_mod, type = "points", quiet = TRUE)
+## ----type-points, eval = FALSE------------------------------------------------
+#  f_orig <- system.file ("extdata", "omaha.png", package = "mapscanner")
+#  f_mod <- system.file ("extdata", "omaha-polygons.png", package = "mapscanner")
+#  xy <- ms_rectify_map (f_orig, f_mod, type = "points", quiet = TRUE)
 
-## ----mapview-points, eval = TRUE, echo = FALSE--------------------------------
-xy$id <- seq (nrow (xy))
-if (!file.exists ("mapshot-points.png"))
-{
-    x <- mapview::mapview (xy)
-    mapview::mapshot (x, file = "mapshot-points.png",
-                      remove_controls = c ("layersControl", "zoomControl"),
-                      vwidth = vwidth, vheight = vheight)
-}
+## ----mapview-points, eval = FALSE, echo = FALSE-------------------------------
+#  xy$id <- seq (nrow (xy))
+#  if (!file.exists ("mapshot-points.png"))
+#  {
+#      x <- mapview::mapview (xy)
+#      mapview::mapshot (x, file = "mapshot-points.png",
+#                        remove_controls = c ("layersControl", "zoomControl"),
+#                        vwidth = vwidth, vheight = vheight)
+#  }
 
 ## ----mapview-points-fakey, eval = FALSE---------------------------------------
 #  xy$id <- seq (nrow (xy))
 #  mapview::mapview (xy)
 
 ## ----mapshot-points-png, echo = FALSE, out.width = "75%"----------------------
-knitr::include_graphics ("mapshot-points.png")
+knitr::include_graphics ("./mapshot-points.png")
 #plot (xy)
 
 ## ----random-polys-fakey, eval = FALSE-----------------------------------------
