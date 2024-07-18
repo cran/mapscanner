@@ -1,6 +1,6 @@
 Package: mapscanner
 Title: Print Maps, Draw on Them, Scan Them Back in
-Version: 0.0.6
+Version: 0.1.1
 Authors@R: c(
     person("Mark", "Padgham", , "mark.padgham@email.com", role = c("aut", "cre")),
     person("Michael D.", "Sumner", , "mdsumner@gmail.com", role = "aut"),
@@ -27,9 +27,8 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
 NeedsCompilation: yes
-RoxygenNote: 7.1.2
-SystemRequirements: C++11
-Packaged: 2021-11-25 11:04:23 UTC; smexus
+RoxygenNote: 7.3.2
+Packaged: 2024-07-18 14:04:04 UTC; smexus
 Author: Mark Padgham [aut, cre],
   Michael D. Sumner [aut],
   Kelly Hondula [rev] (Kelly reviewed the package for rOpenSci, see
@@ -39,4 +38,4 @@ Author: Mark Padgham [aut, cre],
   Stanislaw Adaszewski [cph] (author of include concaveman-cpp code)
 Maintainer: Mark Padgham <mark.padgham@email.com>
 Repository: CRAN
-Date/Publication: 2021-11-25 23:10:03 UTC
+Date/Publication: 2024-07-18 16:30:06 UTC
